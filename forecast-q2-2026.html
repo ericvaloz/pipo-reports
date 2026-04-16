@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forecast Q2 2026 — 16/abr</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117; --surface: #171b26; --surface2: #1e2333;
+    --border: #2a2f42; --text: #e8eaf0; --muted: #6b7194;
+    --accent: #4f7cff; --green: #2dd4a0; --yellow: #f5c842;
+    --red: #ff5c5c; --orange: #ff9440; --purple: #a78bfa;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.6; }
+  .wrapper { max-width: 980px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  .header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .header h1 { font-size: 22px; font-weight: 600; letter-spacing: -0.3px; }
+  .header p { color: var(--muted); font-size: 13px; margin-top: 4px; font-family: 'DM Mono', monospace; }
+  .badge { display: inline-flex; align-items: center; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; font-family: 'DM Mono', monospace; background: rgba(79,124,255,0.15); color: var(--accent); border: 1px solid rgba(79,124,255,0.3); }
+
+  .section { margin-bottom: 36px; }
+  .section-title { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.2px; color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .card-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; }
+  .card-value { font-size: 26px; font-weight: 600; font-family: 'DM Mono', monospace; letter-spacing: -1px; }
+  .card-sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .green { color: var(--green); } .red { color: var(--red); } .yellow { color: var(--yellow); } .orange { color: var(--orange); }
+
+  .meta-bars { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; margin-bottom: 14px; }
+  .meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 14px; font-weight: 500; }
+  .meta-row { margin-bottom: 14px; }
+  .meta-row:last-child { margin-bottom: 0; }
+  .meta-row-head { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px; }
+  .meta-bar-bg { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+  .meta-bar-fill { height: 100%; border-radius: 3px; }
+  .meta-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  .closed-list { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .closed-list-header { padding: 10px 16px; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); background: var(--surface2); border-bottom: 1px solid var(--border); }
+  .closed-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .closed-item:last-child { border-bottom: none; }
+  .closed-name { font-weight: 500; }
+  .closed-meta { color: var(--muted); font-size: 12px; margin-top: 1px; }
+  .closed-mrr { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--green); }
+
+  .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  table { width: 100%; border-collapse: collapse; }
+  thead th { background: var(--surface2); padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); border-bottom: 1px solid var(--border); }
+  thead th:not(:first-child) { text-align: right; }
+  tbody td { padding: 10px 14px; font-size: 13px; border-bottom: 1px solid var(--border); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody td:not(:first-child) { text-align: right; font-family: 'DM Mono', monospace; font-size: 12px; }
+  .team-name { font-weight: 500; }
+  .total-row td { font-weight: 600; background: var(--surface2); border-top: 1px solid var(--border); }
+  .val-green { color: var(--green); } .val-yellow { color: var(--yellow); } .val-orange { color: var(--orange); } .val-muted { color: var(--muted); } .val-red { color: var(--red); }
+
+  .pipeline-group { margin-bottom: 16px; }
+  .pipeline-group-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; padding: 8px 16px; background: var(--surface2); border: 1px solid var(--border); border-bottom: none; border-radius: 10px 10px 0 0; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .dot-commit { background: var(--green); } .dot-best { background: var(--yellow); } .dot-pipeline { background: var(--orange); }
+  .deal-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--surface); border: 1px solid var(--border); border-top: none; font-size: 13px; gap: 12px; }
+  .deal-row:last-child { border-radius: 0 0 10px 10px; }
+  .deal-name { font-weight: 500; flex: 1; min-width: 0; }
+  .deal-owner { color: var(--muted); font-size: 12px; }
+  .deal-stage { color: var(--accent); font-size: 11px; font-family: 'DM Mono', monospace; margin-top: 2px; }
+  .deal-mrr { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; white-space: nowrap; }
+  .deal-meta { display: flex; gap: 6px; align-items: center; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; max-width: 280px; }
+  .tag { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-family: 'DM Mono', monospace; white-space: nowrap; }
+  .tag-warn { background: rgba(255,92,92,0.15); color: var(--red); }
+  .tag-ok { background: rgba(45,212,160,0.1); color: var(--green); }
+  .tag-date { background: rgba(107,113,148,0.15); color: var(--muted); }
+  .tag-days { background: rgba(255,148,64,0.12); color: var(--orange); }
+  .tag-q2 { background: rgba(79,124,255,0.12); color: var(--accent); }
+
+  .alert-list { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .alert-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .alert-item:last-child { border-bottom: none; }
+  .alert-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; margin-top: 1px; }
+  .alert-icon.red { background: rgba(255,92,92,0.2); color: var(--red); }
+  .alert-icon.orange { background: rgba(255,148,64,0.2); color: var(--orange); }
+  .alert-deal { font-weight: 500; }
+  .alert-desc { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .alert-criteria { padding: 10px 16px; background: var(--surface2); border-top: 1px solid var(--border); font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+  .acoes-list { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .acao-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .acao-item:last-child { border-bottom: none; }
+  .acao-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); background: rgba(79,124,255,0.12); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .mention { color: var(--accent); font-weight: 500; }
+  .deal-ref { color: var(--purple); }
+  .deadline { display: inline-flex; align-items: center; font-size: 11px; font-family: 'DM Mono', monospace; color: var(--muted); margin-top: 4px; }
+
+  .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .footer-logo { color: var(--accent); font-weight: 500; }
+
+  @media (max-width: 720px) {
+    .cards { grid-template-columns: 1fr 1fr; }
+    .header { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <h1>📊 Forecast Q2 2026</h1>
+    <p>Report gerado em 16/abr/2026 · Pipeline: Oportunidades · Etapa ≥ 08</p>
+  </div>
+  <span class="badge">Q2 · abr–jun/2026</span>
+</div>
+
+<!-- BLOCO 1: PULSO DO Q -->
+<div class="section">
+  <div class="section-title">1 · Pulso do Q</div>
+  <!-- Fechado Q2: Matec R$11.878,51 (16/abr) + Tivita R$859,40 (13/abr) + DATALAND R$520,42 (07/abr) = R$13.258,33 -->
+  <!-- COMMIT em aberto: Dot Group R$16.662 + Flutter Brazil R$14.000 + Gera Partner R$12.395 = R$43.057 -->
+  <!-- Meta geral: R$211k · Gap atual: 211k - 13.258 = R$197.742 · Gap projetado: 197.742 - 43.057 = R$154.685 -->
+  <div class="cards">
+    <div class="card">
+      <div class="card-label">Fechado no Q2</div>
+      <div class="card-value green">R$13,3k</div>
+      <div class="card-sub">3 clientes · abr</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Forecast em aberto</div>
+      <div class="card-value yellow">R$43,1k</div>
+      <div class="card-sub">Apenas Prob. Alta (COMMIT)</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Gap atual</div>
+      <div class="card-value red">-R$197,7k</div>
+      <div class="card-sub">Meta R$211k − Fechado R$13,3k</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Gap projetado</div>
+      <div class="card-value red">-R$154,6k</div>
+      <div class="card-sub">Gap atual − Prob. Alta R$43,1k</div>
+    </div>
+  </div>
+
+  <!-- Metas por time:
+    G+ (Mari): meta R$40k · fechado R$0 · COMMIT R$0
+    M (Marcelo+Aline+Luciano): meta R$175k · fechado R$11.878 (Matec/Marcelo) · COMMIT: Dot Group R$16.662 (Marcelo) + Flutter R$14.000 (Aline) + Gera Partner R$12.395 (Marcelo) = R$43.057
+    P (Breno+Leo): meta R$36k · fechado: Tivita R$859 + DATALAND R$520 = R$1.380 · COMMIT R$0
+  -->
+  <div class="meta-bars">
+    <div class="meta-label">Meta Q2 por time</div>
+    <div class="meta-row">
+      <div class="meta-row-head">
+        <span style="font-weight:500;">Time G+</span>
+        <span style="font-family:'DM Mono',monospace;color:var(--muted);">R$0 / R$40k <span style="color:var(--red);">(0%)</span></span>
+      </div>
+      <div class="meta-bar-bg"><div class="meta-bar-fill" style="width:0%;background:var(--red);"></div></div>
+      <div class="meta-sub">Prob. Alta: R$0 · PIPELINE: R$342k · OMIT: R$145k em aberto</div>
+    </div>
+    <div class="meta-row">
+      <div class="meta-row-head">
+        <span style="font-weight:500;">Time M</span>
+        <span style="font-family:'DM Mono',monospace;color:var(--muted);">R$11,9k / R$175k <span style="color:var(--red);">(7%)</span></span>
+      </div>
+      <div class="meta-bar-bg"><div class="meta-bar-fill" style="width:7%;background:var(--red);"></div></div>
+      <div class="meta-sub">Gap: R$163,1k · Prob. Alta em aberto: R$43,1k · BEST_CASE: R$63,1k</div>
+    </div>
+    <div class="meta-row">
+      <div class="meta-row-head">
+        <span style="font-weight:500;">Time P</span>
+        <span style="font-family:'DM Mono',monospace;color:var(--muted);">R$1,4k / R$36k <span style="color:var(--red);">(4%)</span></span>
+      </div>
+      <div class="meta-bar-bg"><div class="meta-bar-fill" style="width:4%;background:var(--red);"></div></div>
+      <div class="meta-sub">Gap: R$34,6k · Prob. Alta: R$0 · BEST_CASE: R$15,3k em aberto</div>
+    </div>
+  </div>
+
+  <div class="closed-list">
+    <div class="closed-list-header">Clientes fechados no Q2</div>
+    <div class="closed-item">
+      <div><div class="closed-name">Matec Engenharia</div><div class="closed-meta">Marcelo Silva · Time M · 16/abr</div></div>
+      <div class="closed-mrr">R$11.879</div>
+    </div>
+    <div class="closed-item">
+      <div><div class="closed-name">Tivita</div><div class="closed-meta">Breno Haus · Time P · 13/abr</div></div>
+      <div class="closed-mrr">R$859</div>
+    </div>
+    <div class="closed-item">
+      <div><div class="closed-name">DATALAND</div><div class="closed-meta">Breno Haus · Time P · 07/abr</div></div>
+      <div class="closed-mrr">R$520</div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCO 2: POR TIME -->
+<!-- 
+  G+ (Mari 149768337):
+    Fechado: R$0
+    COMMIT: R$0
+    BEST_CASE: R$0
+    PIPELINE: iFood R$170k + Loggi R$112k + Neon R$60k + GUPY R$20k = R$362k
+    OMIT: LATAM R$75k + Maxion R$70k + KFC R$30k = R$175k
+    Total pipeline: R$537k
+    Coverage sobre meta R$40k: 13,4x
+
+  M (Marcelo 465298555 + Aline 192702358 + Luciano 175077773):
+    Fechado: Matec R$11.879 (Marcelo)
+    COMMIT: Dot Group R$16.662 (Marcelo) + Flutter R$14.000 (Aline) + Gera Partner R$12.395 (Marcelo) = R$43.057
+    BEST_CASE: Veracel R$35.900 (Luciano) + Cartão Elo R$28.176 (Luciano) + Grupo Boticário R$14.500 (Luciano) = R$78.576 → mas Grupo Boticário tem closedate jun/26 portanto Q2. Veracel e Cartão Elo closedates vencidas.
+    PIPELINE: Ferroport R$22k + Mitre Realty R$20.750 + Grupo Card R$15k + BT Créditos R$14.500 + Math Group R$9.600 + meutudo R$9k + Enjoei R$9k + GV Logística R$5.375 + V4Company R$5k + Cadastra R$5k + Petrobahia R$5k + Wevets R$3k + Fade-UFPE R$10k + Ponto Forte R$1.260 = R$134.485
+    OMIT: Saint-Gobain R$290k + Refit R$47.5k + Plano&Plano R$42k + Estrela R$35k + Farmax R$18.5k + Martinelli R$18k + Cognita R$14.4k + Grupo Taking R$2k = R$467.4k
+    Total pipeline: R$723.5k
+    Coverage: 4,13x
+
+  P (Breno 331668616 + Leo 1237848121):
+    Fechado: Tivita R$859 + DATALAND R$520 = R$1.379
+    COMMIT: R$0
+    BEST_CASE: Kunumi R$12.500 + Leonardi R$3.250 + Revena R$1.300 + Lerian Studio R$800 + Stocci R$700 = R$18.550
+    PIPELINE: Amicci R$8k + Woba R$8k + Addebitare R$7.5k + Sefer R$5.9k + Conac R$4.5k + Hubify R$1.9k + VELLOZNET R$1.8k + Car System R$1.5k + dr.consulta R$1.5k + Just Travel R$1.5k + Idea Maker R$3k + VAAS R$420 = R$45.520
+    OMIT: VELLOZNET R$1.800 (já em OMIT) — X-Brain R$845 (Leo, OMIT)
+    Total pipeline: R$65.449
+    Coverage: 1,82x
+-->
+<div class="section">
+  <div class="section-title">2 · Por time</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Fechado</th>
+          <th>Prob. Alta</th>
+          <th>Prob. Média</th>
+          <th>Prob. Baixa</th>
+          <th>Sem cat.</th>
+          <th>Total pipeline</th>
+          <th>Coverage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="team-name">Time G+</td>
+          <td class="val-muted">—</td>
+          <td class="val-muted">—</td>
+          <td class="val-muted">—</td>
+          <td class="val-orange">R$362,0k</td>
+          <td class="val-muted">R$175,0k</td>
+          <td class="val-muted">R$537,0k</td>
+          <td class="val-red">13,43x</td>
+        </tr>
+        <tr>
+          <td class="team-name">Time M</td>
+          <td class="val-green">R$11,9k</td>
+          <td class="val-green">R$43,1k</td>
+          <td class="val-yellow">R$78,6k</td>
+          <td class="val-orange">R$134,5k</td>
+          <td class="val-muted">R$467,4k</td>
+          <td class="val-muted">R$735,5k</td>
+          <td class="val-orange">4,20x</td>
+        </tr>
+        <tr>
+          <td class="team-name">Time P</td>
+          <td class="val-green">R$1,4k</td>
+          <td class="val-muted">—</td>
+          <td class="val-yellow">R$18,6k</td>
+          <td class="val-orange">R$45,5k</td>
+          <td class="val-muted">R$2,6k</td>
+          <td class="val-muted">R$68,1k</td>
+          <td class="val-yellow">1,89x</td>
+        </tr>
+        <tr class="total-row">
+          <td>Total</td>
+          <td class="val-green">R$13,3k</td>
+          <td class="val-green">R$43,1k</td>
+          <td class="val-yellow">R$97,2k</td>
+          <td class="val-orange">R$542,0k</td>
+          <td class="val-muted">R$645,0k</td>
+          <td class="val-muted">R$1.340,6k</td>
+          <td class="val-muted">6,35x</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- BLOCO 3: PIPELINE Q2 — COMMIT -->
+<div class="section">
+  <div class="section-title">3 · Pipeline Q2 — closedate até 30/jun (ou vencida)</div>
+
+  <!-- PROB ALTA / COMMIT -->
+  <!-- Dot Group: criado 31/mar/25 = 381d no pipeline · closedate 30/abr/26 = +14d -->
+  <!-- Flutter Brazil: criado 27/ago/25 = 232d no pipeline · closedate 31/mar/26 = vencida 16d -->
+  <!-- Gera Partner: criado 26/fev/26 = 49d no pipeline · closedate 30/abr/26 = +14d -->
+  <div class="pipeline-group">
+    <div class="pipeline-group-label"><span class="dot dot-commit"></span>Prob. Alta (COMMIT) · R$43,1k · 3 deals</div>
+    <div class="deal-row">
+      <div class="deal-name">Dot Group<div class="deal-owner">Marcelo Silva · Time M</div><div class="deal-stage">11 Negociação</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">381d ⚠</span><span class="tag tag-q2">prev. 30/abr</span></div>
+      <div class="deal-mrr green">R$16.662</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Flutter Brazil<div class="deal-owner">Aline Furlaneto · Time M</div><div class="deal-stage">11 Negociação</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">vencida 16d ⚠</span><span class="tag tag-warn">232d ⚠</span></div>
+      <div class="deal-mrr green">R$14.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Gera Partner<div class="deal-owner">Marcelo Silva · Time M</div><div class="deal-stage">11 Negociação</div></div>
+      <div class="deal-meta"><span class="tag tag-ok">49d</span><span class="tag tag-q2">prev. 30/abr</span></div>
+      <div class="deal-mrr green">R$12.395</div>
+    </div>
+  </div>
+
+  <!-- PROB MEDIA / BEST_CASE com closedate Q2 ou vencida -->
+  <!-- Veracel: closedate jan/26 = vencida 75d · Luciano · Time M · 11 Negociação · 176d pipeline -->
+  <!-- Cartão Elo: closedate fev/26 = vencida 47d · Luciano · Time M · 11 Negociação · 149d pipeline -->
+  <!-- Grupo Boticário: closedate jun/26 · Luciano · Time M · 11 Negociação · 371d pipeline -->
+  <!-- Kunumi: closedate 30/abr · Breno · Time P · 10 Proposta apresentada · 79d pipeline -->
+  <!-- Leonardi: closedate 30/abr · Breno · Time P · 11 Negociação · 63d pipeline -->
+  <!-- Revena: closedate 14/mai · Breno · Time P · 11 Negociação · 65d pipeline -->
+  <!-- Lerian Studio: closedate 29/mai · Breno · Time P · 10 Proposta apresentada · 38d pipeline -->
+  <!-- Stocci: closedate 30/abr · Breno · Time P · 10 Proposta apresentada · 70d pipeline -->
+  <div class="pipeline-group">
+    <div class="pipeline-group-label"><span class="dot dot-best"></span>Prob. Média (BEST CASE) · R$97,2k · 8 deals — inclui vencidas ⚠</div>
+    <div class="deal-row">
+      <div class="deal-name">Veracel Celulose<div class="deal-owner">Luciano Moreira · Time M</div><div class="deal-stage">11 Negociação</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">vencida 75d ⚠</span><span class="tag tag-warn">176d ⚠</span></div>
+      <div class="deal-mrr yellow">R$35.900</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Cartão Elo<div class="deal-owner">Luciano Moreira · Time M</div><div class="deal-stage">11 Negociação</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">vencida 47d ⚠</span><span class="tag tag-warn">149d ⚠</span></div>
+      <div class="deal-mrr yellow">R$28.176</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Grupo Boticário<div class="deal-owner">Luciano Moreira · Time M</div><div class="deal-stage">11 Negociação</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">371d ⚠</span><span class="tag tag-q2">prev. 30/jun</span></div>
+      <div class="deal-mrr yellow">R$14.500</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Kunumi<div class="deal-owner">Breno Haus · Time P</div><div class="deal-stage">10 Proposta apresentada</div></div>
+      <div class="deal-meta"><span class="tag tag-ok">79d</span><span class="tag tag-q2">prev. 30/abr</span></div>
+      <div class="deal-mrr yellow">R$12.500</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Leonardi Advogados<div class="deal-owner">Breno Haus · Time P</div><div class="deal-stage">11 Negociação</div></div>
+      <div class="deal-meta"><span class="tag tag-ok">63d</span><span class="tag tag-q2">prev. 30/abr</span></div>
+      <div class="deal-mrr yellow">R$3.250</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Revena<div class="deal-owner">Breno Haus · Time P</div><div class="deal-stage">11 Negociação</div></div>
+      <div class="deal-meta"><span class="tag tag-ok">65d</span><span class="tag tag-q2">prev. 14/mai</span></div>
+      <div class="deal-mrr yellow">R$1.300</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Lerian Studio<div class="deal-owner">Breno Haus · Time P</div><div class="deal-stage">10 Proposta apresentada</div></div>
+      <div class="deal-meta"><span class="tag tag-ok">38d</span><span class="tag tag-q2">prev. 29/mai</span></div>
+      <div class="deal-mrr yellow">R$800</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Stocci<div class="deal-owner">Breno Haus · Time P</div><div class="deal-stage">10 Proposta apresentada</div></div>
+      <div class="deal-meta"><span class="tag tag-ok">70d</span><span class="tag tag-q2">prev. 30/abr</span></div>
+      <div class="deal-mrr yellow">R$700</div>
+    </div>
+  </div>
+
+  <!-- PROB BAIXA / PIPELINE destaques Q2 -->
+  <div class="pipeline-group">
+    <div class="pipeline-group-label"><span class="dot dot-pipeline"></span>Prob. Baixa (PIPELINE) · destaques Q2</div>
+    <div class="deal-row">
+      <div class="deal-name">iFood<div class="deal-owner">Marianne Duvekot · Time G+</div><div class="deal-stage">09 Elaboração de proposta</div></div>
+      <div class="deal-meta"><span class="tag tag-ok">41d</span><span class="tag tag-q2">prev. 30/jun</span></div>
+      <div class="deal-mrr orange">R$170.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Loggi<div class="deal-owner">Marianne Duvekot · Time G+</div><div class="deal-stage">09 Elaboração de proposta</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">vencida 76d ⚠</span><span class="tag tag-warn">281d ⚠</span></div>
+      <div class="deal-mrr orange">R$112.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Neon<div class="deal-owner">Marianne Duvekot · Time G+</div><div class="deal-stage">08 Desenvolvimento</div></div>
+      <div class="deal-meta"><span class="tag tag-days">66d</span><span class="tag tag-q2">prev. set/26</span></div>
+      <div class="deal-mrr orange">R$60.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Ferroport<div class="deal-owner">Marcelo Silva · Time M</div><div class="deal-stage">08 Desenvolvimento</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem closedate ⚠</span><span class="tag tag-days">44d</span></div>
+      <div class="deal-mrr orange">R$22.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Mitre Realty<div class="deal-owner">Marcelo Silva · Time M</div><div class="deal-stage">08 Desenvolvimento</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">vencida 14d ⚠</span><span class="tag tag-days">38d</span></div>
+      <div class="deal-mrr orange">R$20.750</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">GUPY<div class="deal-owner">Marianne Duvekot · Time G+</div><div class="deal-stage">10 Proposta apresentada</div></div>
+      <div class="deal-meta"><span class="tag tag-ok">31d</span><span class="tag tag-q2">prev. 30/jun</span></div>
+      <div class="deal-mrr orange">R$20.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Grupo Card<div class="deal-owner">Marcelo Silva · Time M</div><div class="deal-stage">09 Elaboração de proposta</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem closedate ⚠</span><span class="tag tag-days">93d</span></div>
+      <div class="deal-mrr orange">R$15.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">BT Créditos<div class="deal-owner">Aline Furlaneto · Time M</div><div class="deal-stage">11 Negociação</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">vencida 16d ⚠</span><span class="tag tag-warn">225d ⚠</span></div>
+      <div class="deal-mrr orange">R$14.500</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Fade-UFPE<div class="deal-owner">Marcelo Silva · Time M</div><div class="deal-stage">08 Desenvolvimento</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem closedate ⚠</span><span class="tag tag-days">42d</span></div>
+      <div class="deal-mrr orange">R$10.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Math Group<div class="deal-owner">Marcelo Silva · Time M</div><div class="deal-stage">08 Desenvolvimento</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem closedate ⚠</span><span class="tag tag-days">70d</span></div>
+      <div class="deal-mrr orange">R$9.600</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">meutudo.<div class="deal-owner">Marcelo Silva · Time M</div><div class="deal-stage">08 Desenvolvimento</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem closedate ⚠</span><span class="tag tag-days">63d</span></div>
+      <div class="deal-mrr orange">R$9.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Enjoei<div class="deal-owner">Marcelo Silva · Time M</div><div class="deal-stage">08 Desenvolvimento</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">vencida 20d ⚠</span><span class="tag tag-days">73d</span></div>
+      <div class="deal-mrr orange">R$9.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Amicci<div class="deal-owner">Breno Haus · Time P</div><div class="deal-stage">09 Elaboração de proposta</div></div>
+      <div class="deal-meta"><span class="tag tag-ok">50d</span><span class="tag tag-q2">prev. 30/jun</span></div>
+      <div class="deal-mrr orange">R$8.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Woba<div class="deal-owner">Breno Haus · Time P</div><div class="deal-stage">08 Desenvolvimento</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem closedate ⚠</span><span class="tag tag-days">85d</span></div>
+      <div class="deal-mrr orange">R$8.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Addebitare Capital<div class="deal-owner">Breno Haus · Time P</div><div class="deal-stage">09 Elaboração de proposta</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem closedate ⚠</span><span class="tag tag-days">76d</span></div>
+      <div class="deal-mrr orange">R$7.500</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">GV Logística<div class="deal-owner">Marcelo Silva · Time M</div><div class="deal-stage">11 Negociação</div></div>
+      <div class="deal-meta"><span class="tag tag-ok">65d</span><span class="tag tag-q2">prev. 30/abr</span></div>
+      <div class="deal-mrr orange">R$5.375</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Sefer Investimentos<div class="deal-owner">Breno Haus · Time P</div><div class="deal-stage">09 Elaboração de proposta</div></div>
+      <div class="deal-meta"><span class="tag tag-ok">30d</span><span class="tag tag-warn">sem closedate ⚠</span></div>
+      <div class="deal-mrr orange">R$5.900</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Cadastra<div class="deal-owner">Marcelo Silva · Time M</div><div class="deal-stage">10 Proposta apresentada</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">vencida 168d ⚠</span><span class="tag tag-warn">186d ⚠</span></div>
+      <div class="deal-mrr orange">R$5.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">dr.consulta<div class="deal-owner">Aline Furlaneto · Time M</div><div class="deal-stage">11 Negociação</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">vencida 16d ⚠</span><span class="tag tag-warn">234d ⚠</span></div>
+      <div class="deal-mrr orange">R$1.500</div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCO 4: PIPELINE SEM PREVISÃO / OMIT -->
+<div class="section">
+  <div class="section-title">4 · Pipeline sem categoria (OMIT) — monitoramento</div>
+
+  <div class="pipeline-group">
+    <div class="pipeline-group-label" style="border-radius:10px 10px 0 0;">Time G+ · R$175,0k sem cat.</div>
+    <div class="deal-row">
+      <div class="deal-name">LATAM Airlines<div class="deal-owner">Marianne Duvekot</div><div class="deal-stage">08 Desenvolvimento</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem cat. ⚠</span><span class="tag tag-warn">prev. nov/26</span></div>
+      <div class="deal-mrr val-muted">R$75.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Maxion<div class="deal-owner">Marianne Duvekot</div><div class="deal-stage">09 Elaboração de proposta</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem cat. ⚠</span><span class="tag tag-warn">prev. nov/26</span></div>
+      <div class="deal-mrr val-muted">R$70.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">KFC<div class="deal-owner">Marianne Duvekot</div><div class="deal-stage">08 Desenvolvimento</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem cat. ⚠</span><span class="tag tag-warn">sem closedate ⚠</span></div>
+      <div class="deal-mrr val-muted">R$30.000</div>
+    </div>
+  </div>
+
+  <div class="pipeline-group" style="margin-top:16px;">
+    <div class="pipeline-group-label" style="border-radius:10px 10px 0 0;">Time M · R$467,4k sem cat.</div>
+    <div class="deal-row">
+      <div class="deal-name">Saint-Gobain<div class="deal-owner">Luciano Moreira</div><div class="deal-stage">10 Proposta apresentada</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem cat. ⚠</span><span class="tag tag-q2">prev. 30/abr</span></div>
+      <div class="deal-mrr val-muted">R$290.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Refit<div class="deal-owner">Luciano Moreira</div><div class="deal-stage">10 Proposta apresentada</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem cat. ⚠</span><span class="tag tag-warn">vencida 16d ⚠</span></div>
+      <div class="deal-mrr val-muted">R$47.500</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Plano&amp;Plano<div class="deal-owner">Luciano Moreira</div><div class="deal-stage">10 Proposta apresentada</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem cat. ⚠</span><span class="tag tag-q2">prev. 31/mai</span></div>
+      <div class="deal-mrr val-muted">R$42.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Estrela Alimentos<div class="deal-owner">Luciano Moreira</div><div class="deal-stage">09 Elaboração de proposta</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem cat. ⚠</span><span class="tag tag-warn">sem closedate ⚠</span></div>
+      <div class="deal-mrr val-muted">R$35.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Farmax<div class="deal-owner">Luciano Moreira</div><div class="deal-stage">10 Proposta apresentada</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem cat. ⚠</span><span class="tag tag-q2">prev. 31/mai</span></div>
+      <div class="deal-mrr val-muted">R$18.500</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Martinelli Advogados<div class="deal-owner">Luciano Moreira</div><div class="deal-stage">10 Proposta apresentada</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem cat. ⚠</span><span class="tag tag-warn">vencida 16d ⚠</span></div>
+      <div class="deal-mrr val-muted">R$18.000</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Cognita Schools<div class="deal-owner">Luciano Moreira</div><div class="deal-stage">08 Desenvolvimento</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem cat. ⚠</span><span class="tag tag-q2">prev. 30/jun</span></div>
+      <div class="deal-mrr val-muted">R$14.400</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">Grupo Taking<div class="deal-owner">Marcelo Silva</div><div class="deal-stage">10 Proposta apresentada</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem cat. ⚠</span><span class="tag tag-warn">prev. out/26</span></div>
+      <div class="deal-mrr val-muted">R$2.000</div>
+    </div>
+  </div>
+
+  <div class="pipeline-group" style="margin-top:16px;">
+    <div class="pipeline-group-label" style="border-radius:10px 10px 0 0;">Time P · R$2,6k sem cat.</div>
+    <div class="deal-row">
+      <div class="deal-name">VELLOZNET<div class="deal-owner">Breno Haus</div><div class="deal-stage">09 Elaboração de proposta</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem cat. ⚠</span><span class="tag tag-warn">sem closedate ⚠</span></div>
+      <div class="deal-mrr val-muted">R$1.800</div>
+    </div>
+    <div class="deal-row">
+      <div class="deal-name">X-Brain<div class="deal-owner">Leonardo Cezar Gil</div><div class="deal-stage">08 Desenvolvimento</div></div>
+      <div class="deal-meta"><span class="tag tag-warn">sem cat. ⚠</span><span class="tag tag-warn">sem closedate ⚠</span></div>
+      <div class="deal-mrr val-muted">R$845</div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOCO 5: ALERTAS -->
+<div class="section">
+  <div class="section-title">5 · Alertas</div>
+  <div class="alert-list">
+    <div class="alert-item">
+      <div class="alert-icon red">●</div>
+      <div>
+        <div class="alert-deal">Loggi — R$112.000</div>
+        <div class="alert-desc">Closedate vencida 76d (jan/26). 281d no pipeline. PIPELINE. 09 Elaboração de proposta. Sem avanço de etapa.</div>
+      </div>
+    </div>
+    <div class="alert-item">
+      <div class="alert-icon red">●</div>
+      <div>
+        <div class="alert-deal">Veracel Celulose — R$35.900</div>
+        <div class="alert-desc">Closedate vencida 75d (jan/26). 176d no pipeline. BEST_CASE. 11 Negociação — atualizar closedate ou qualificar status.</div>
+      </div>
+    </div>
+    <div class="alert-item">
+      <div class="alert-icon red">●</div>
+      <div>
+        <div class="alert-deal">Cartão Elo — R$28.176</div>
+        <div class="alert-desc">Closedate vencida 47d (fev/26). 149d no pipeline. BEST_CASE. 11 Negociação.</div>
+      </div>
+    </div>
+    <div class="alert-item">
+      <div class="alert-icon red">●</div>
+      <div>
+        <div class="alert-deal">Cadastra — R$5.000</div>
+        <div class="alert-desc">Closedate vencida 168d (out/25). 186d no pipeline. PIPELINE. 10 Proposta apresentada — qualificar ou mover para perdido.</div>
+      </div>
+    </div>
+    <div class="alert-item">
+      <div class="alert-icon red">●</div>
+      <div>
+        <div class="alert-deal">Flutter Brazil — R$14.000</div>
+        <div class="alert-desc">COMMIT com closedate vencida 16d (mar/26). 232d no pipeline. Confirmar se deal segue ou rebaixar categoria.</div>
+      </div>
+    </div>
+    <div class="alert-item">
+      <div class="alert-icon red">●</div>
+      <div>
+        <div class="alert-deal">BT Créditos — R$14.500 · dr.consulta — R$1.500</div>
+        <div class="alert-desc">Closedates vencidas 16d (mar/26). 225d e 234d no pipeline respectivamente. PIPELINE. 11 Negociação.</div>
+      </div>
+    </div>
+    <div class="alert-item">
+      <div class="alert-icon red">●</div>
+      <div>
+        <div class="alert-deal">Mitre Realty — R$20.750 · Enjoei — R$9.000</div>
+        <div class="alert-desc">Closedates vencidas 14d e 20d. PIPELINE. Sem avanço de etapa.</div>
+      </div>
+    </div>
+    <div class="alert-item">
+      <div class="alert-icon orange">●</div>
+      <div>
+        <div class="alert-deal">Dot Group — R$16.662</div>
+        <div class="alert-desc">381d no pipeline (limite COMMIT: 30d). 11 Negociação. Confirmar COMMIT ou rebaixar categoria.</div>
+      </div>
+    </div>
+    <div class="alert-item">
+      <div class="alert-icon orange">●</div>
+      <div>
+        <div class="alert-deal">Grupo Boticário — R$14.500</div>
+        <div class="alert-desc">371d no pipeline (limite BEST_CASE: 60d). 11 Negociação. Confirmar status.</div>
+      </div>
+    </div>
+    <div class="alert-item">
+      <div class="alert-icon orange">●</div>
+      <div>
+        <div class="alert-deal">Saint-Gobain R$290k · Refit R$47,5k · Plano&amp;Plano R$42k · Estrela R$35k · Farmax R$18,5k · Martinelli R$18k · Cognita R$14,4k</div>
+        <div class="alert-desc">Deals com OMIT no Time M (Luciano). Representam R$465k sem categoria de forecast — precisam ser classificados.</div>
+      </div>
+    </div>
+    <div class="alert-item">
+      <div class="alert-icon orange">●</div>
+      <div>
+        <div class="alert-deal">Ferroport R$22k · Grupo Card R$15k · Fade-UFPE R$10k · Math Group R$9,6k · meutudo R$9k</div>
+        <div class="alert-desc">Deals PIPELINE sem closedate definida no Time M. Total R$65,6k sem data de previsão.</div>
+      </div>
+    </div>
+    <div class="alert-criteria">
+      Critérios: closedate vencida &gt;15d | sem closedate em COMMIT/BEST_CASE | COMMIT &gt;30d · BEST_CASE &gt;60d · PIPELINE &gt;90d no pipeline | OMIT em deals ativos ≥ R$10k
+    </div>
+  </div>
+</div>
+
+<!-- BLOCO 6: AÇÕES -->
+<div class="section">
+  <div class="section-title">6 · Ações desta semana</div>
+  <div class="acoes-list">
+    <div class="acao-item">
+      <div class="acao-num">1</div>
+      <div>
+        <div><span class="mention">@Luciano</span> — Classificar <span class="deal-ref">Saint-Gobain</span>, <span class="deal-ref">Plano&amp;Plano</span>, <span class="deal-ref">Estrela</span>, <span class="deal-ref">Farmax</span>, <span class="deal-ref">Martinelli</span>, <span class="deal-ref">Cognita</span> (todos OMIT). Atualizar closedate de <span class="deal-ref">Veracel</span> e <span class="deal-ref">Cartão Elo</span> (vencidas 47–75d).</div>
+        <div class="deadline">⏰ até 23/abr</div>
+      </div>
+    </div>
+    <div class="acao-item">
+      <div class="acao-num">2</div>
+      <div>
+        <div><span class="mention">@Marcelo</span> — Confirmar <span class="deal-ref">Dot Group</span> (381d) como COMMIT. Definir closedate para <span class="deal-ref">Ferroport</span>, <span class="deal-ref">Grupo Card</span>, <span class="deal-ref">Fade-UFPE</span>, <span class="deal-ref">Math Group</span>, <span class="deal-ref">meutudo</span>. Atualizar <span class="deal-ref">Enjoei</span> e <span class="deal-ref">Mitre Realty</span> (closedates vencidas).</div>
+        <div class="deadline">⏰ até 23/abr</div>
+      </div>
+    </div>
+    <div class="acao-item">
+      <div class="acao-num">3</div>
+      <div>
+        <div><span class="mention">@Aline</span> — Confirmar <span class="deal-ref">Flutter Brazil</span> (COMMIT vencida 16d): atualizar closedate ou rebaixar. Ação em <span class="deal-ref">BT Créditos</span> e <span class="deal-ref">dr.consulta</span> (closedates vencidas 16d).</div>
+        <div class="deadline">⏰ até 23/abr</div>
+      </div>
+    </div>
+    <div class="acao-item">
+      <div class="acao-num">4</div>
+      <div>
+        <div><span class="mention">@Mari</span> — Classificar <span class="deal-ref">LATAM Airlines</span>, <span class="deal-ref">Maxion</span> e <span class="deal-ref">KFC</span> (todos OMIT, R$175k). Atualizar <span class="deal-ref">Loggi</span> (vencida 76d, 281d no pipeline) — reassinar ou mover para perdido.</div>
+        <div class="deadline">⏰ até 23/abr</div>
+      </div>
+    </div>
+    <div class="acao-item">
+      <div class="acao-num">5</div>
+      <div>
+        <div><span class="mention">@Breno</span> — Definir closedate para <span class="deal-ref">Woba</span>, <span class="deal-ref">Addebitare</span>, <span class="deal-ref">Sefer</span> e <span class="deal-ref">VELLOZNET</span> (sem data). Classificar <span class="deal-ref">VELLOZNET</span> (OMIT).</div>
+        <div class="deadline">⏰ até 23/abr</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <span class="footer-logo">Pipo Saúde · RevOps</span>
+  <span>forecast-16abr-2026 · gerado via HubSpot MCP · etapa ≥ 08</span>
+</div>
+
+</div>
+</body>
+</html>
